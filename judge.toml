@@ -1,7 +1,6 @@
 [jobs.test-submit]
-
-image = {source = "dockerfile",path = "."}
+image = { source = "dockerfile", path = "."}
 
 run = [
-    "cat $input | ./main",
+  "java -cp dst/ Main < $input",
 ]
