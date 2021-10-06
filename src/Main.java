@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class Lexer {
 
     static String[] rwtab = new String[] { "if", "else", "while", "break", "return", "continue", };
     static String storage = "";
@@ -13,18 +13,36 @@ public class Main {
     static int Snum, row;
     static String Ident;
     static String sum;
+    static boolean isNum = false, isLetter = false;
+    static boolean flag=true;
 
     static void analyzer() {
+        isNum=false ;
+        isLetter=false;
         token.delete(0, token.length());
-        ch = storage.charAt(index++);
+        ch = storage.charAt(index);
+        index++;
         while (ch == ' ') {
-            ch = storage.charAt(index++);
+            ch = storage.charAt(index);
+            index++;
         }
 
-        if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
-            while ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+        if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')|| (ch=='_')) {
+            while ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')|| (ch=='_')) {
+                if(isNum==true&&((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')|| (ch=='_'))){
+                    break;
+                }
+                if((ch >= '0' && ch <= '9')){
+                    isNum=true;
+                    isLetter=false;
+                }
                 token.append(ch);
-                ch = storage.charAt(index++);
+                if(index==storage.length()){
+                    flag=false;
+                    break;
+                }
+                ch = storage.charAt(index);
+                index++;
             }
             index--;
             Snum = 25;
@@ -43,7 +61,12 @@ public class Main {
             sum = "";
             while ((ch >= '0' && ch <= '9')) {
                 sum = sum + ch;
-                ch = storage.charAt(index++);
+                 if(index==storage.length()){
+                    flag=false;
+                    break;
+                }
+                ch = storage.charAt(index);
+                index++;
             }
             index--;
             Snum = 26;
@@ -143,14 +166,14 @@ public class Main {
         try {
 
             while ((tempString = stdin.readLine()) != null) {
-                storage += tempString;
+
+                storage += " "+tempString;
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         index = 0;
-        // 输出过程
         do {
             analyzer();
             switch (Snum) {
@@ -169,7 +192,7 @@ public class Main {
                 default:
                     System.out.println(Ident);
             }
-        } while (Snum != 0);
+        } while (Snum != 0&&flag==true);
     }
 
 }
