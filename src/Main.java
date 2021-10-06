@@ -183,34 +183,7 @@ public class Main {
             e.printStackTrace();
         }
         index = 0;
-        do {
-            analyzer();
-         //   if(flag==false)
-          //  break;
-            switch (Snum) {
-                case 26:
-                    System.out.println("Number(" + sum + ")");
-                    break;
-                case -1:
-                    System.out.println("Err");
-                    Snum = 0;
-                    break;
-                case -2:
-                    break;
-                case 25:
-                    System.out.println("Ident(" + token + ")");
-                    break;
-                default:
-                if(p.equals(Ident))
-                break;
-                else{
-                    System.out.println(Ident);
-                    p=Ident;
-                }
-                    
-                    
-            }
-        } while (Snum != 0&&flag==true);
+System.out.println(storage);
     }
 
 }
