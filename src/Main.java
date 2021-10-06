@@ -1,10 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Vector;
 
 public class Main {
 
     static String[] rwtab = new String[] { "if", "else", "while", "break", "return", "continue", };
+    static String[] idtab = new String[] { "Lt", "Gt", "Mult", "Eq", "Assign", "Div","Plus","Semicolon","LPar","RPar","LBrace", "RBrace" };
     static String storage = "";
     static StringBuilder token = new StringBuilder("");
 
@@ -168,9 +170,9 @@ public class Main {
 
     public static void main(String[] args) {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+        Vector<String> output = new Vector<String>();
         index = 0;
         row = 1;
-        String p = "";
         String tempString;
         try {
 
@@ -183,7 +185,39 @@ public class Main {
             e.printStackTrace();
         }
         index = 0;
-System.out.println(storage);
+        do {
+            analyzer();
+         //   if(flag==false)
+          //  break;
+            switch (Snum) {
+                case 26:
+                    output.add("Number(" + sum + ")");
+                    break;
+                case -1:
+                    output.add("Err");
+                    Snum = 0;
+                    break;
+                case -2:
+                    break;
+                case 25:
+                output.add("Ident(" + token + ")");
+                    break;
+                default:
+                output.add(Ident);
+                }
+        } while (Snum != 0&&flag==true);
+        String temp = "";
+        temp=output.lastElement();
+        for(String a : idtab){
+            if(a.equals(temp)){
+                output.removeElementAt(output.size()-1);
+            }
+        }
+        for(String a : output){
+            System.out.println(a);
+        }
     }
+  
 
+  
 }
