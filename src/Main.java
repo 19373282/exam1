@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Lexer {
+public class Main {
 
     static String[] rwtab = new String[] { "if", "else", "while", "break", "return", "continue", };
     static String storage = "";
