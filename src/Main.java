@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class Lexer {
 
     static String[] rwtab = new String[] { "if", "else", "while", "break", "return", "continue", };
     static String storage = "";
@@ -37,13 +37,13 @@ public class Main {
 
         if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')|| (ch=='_')) {
             while ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')|| (ch=='_')) {
-                if(isNum==true&&((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')|| (ch=='_'))){
-                    break;
-                }
-                if((ch >= '0' && ch <= '9')){
-                    isNum=true;
-                    isLetter=false;
-                }
+               // if(isNum==true&&((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')|| (ch=='_'))){
+                //    break;
+             //   }
+               // if((ch >= '0' && ch <= '9')){
+                //    isNum=true;
+                //    isLetter=false;
+               // }
                 token.append(ch);
                 if(index==storage.length()){
                     flag=false;
@@ -170,6 +170,7 @@ public class Main {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
         index = 0;
         row = 1;
+        String p = "";
         String tempString;
         try {
 
@@ -184,6 +185,8 @@ public class Main {
         index = 0;
         do {
             analyzer();
+         //   if(flag==false)
+          //  break;
             switch (Snum) {
                 case 26:
                     System.out.println("Number(" + sum + ")");
@@ -198,11 +201,16 @@ public class Main {
                     System.out.println("Ident(" + token + ")");
                     break;
                 default:
+                if(p.equals(Ident))
+                break;
+                else{
                     System.out.println(Ident);
+                    p=Ident;
+                }
+                    
+                    
             }
         } while (Snum != 0&&flag==true);
     }
 
 }
-
-
