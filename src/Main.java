@@ -20,9 +20,17 @@ public class Main {
         isNum=false ;
         isLetter=false;
         token.delete(0, token.length());
+        if(index==storage.length()){
+            flag=false;
+            return;
+        }
         ch = storage.charAt(index);
         index++;
         while (ch == ' ') {
+            if(index==storage.length()){
+                flag=false;
+                break;
+            }
             ch = storage.charAt(index);
             index++;
         }
