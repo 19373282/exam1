@@ -156,7 +156,9 @@ public class Main {
                     Snum = 91;
                     token.append(ch);
                     break;
-
+                case '\t':
+                Snum = 100;
+                break;
                 case '}':
                     Ident = "RBrace";
                     Snum = 92;
@@ -198,6 +200,8 @@ public class Main {
                     Snum = 0;
                     break;
                 case -2:
+                    break;
+                case 100:
                     break;
                 case 25:
                 output.add("Ident(" + token + ")");
